@@ -12,7 +12,10 @@ BuildRequires:	rpmbuild(macros) >= 1.461
 BuildArch:	noarch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
-%define		_appdir		%{php_data_dir}/%{name}
+# _phpdocdir / php_docdir / phpdoc_dir ?
+%define		_phpdocdir		%{_docdir}/phpdoc
+
+%define		_appdir			%{php_data_dir}/%{name}
 
 %description
 PHP email transport class featuring multiple file attachments, SMTP
@@ -30,6 +33,7 @@ poprzez SMTP. Metody są oparte na popularnym komponencie AspEmail.
 Summary:	Online manual for %{name}
 Summary(pl.UTF-8):	Dokumentacja online do %{name}
 Group:		Documentation
+Requires:	php-dirs
 
 %description phpdoc
 Documentation for %{name}.
@@ -48,8 +52,8 @@ install -d $RPM_BUILD_ROOT%{_appdir}/language
 cp -a *.php $RPM_BUILD_ROOT%{_appdir}
 cp -a language/*.php $RPM_BUILD_ROOT%{_appdir}/language
 
-install -d $RPM_BUILD_ROOT%{_docdir}/%{name}
-cp -a phpdoc/* $RPM_BUILD_ROOT%{_docdir}/%{name}
+install -d $RPM_BUILD_ROOT%{_phpdocdir}/%{name}
+cp -a phpdoc/* $RPM_BUILD_ROOT%{_phpdocdir}/%{name}
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -61,4 +65,4 @@ rm -rf $RPM_BUILD_ROOT
 
 %files phpdoc
 %defattr(644,root,root,755)
-%{_docdir}/%{name}
+%{_phpdocdir}/%{name}
