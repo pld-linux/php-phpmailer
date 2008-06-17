@@ -8,10 +8,11 @@ Group:		Development/Languages/PHP
 Source0:	http://dl.sourceforge.net/phpmailer/PHPMailer_v%{version}.tar.gz
 # Source0-md5:	1fba7b3b8f67197c371da2f791d517de
 URL:		http://phpmailer.codeworxtech.com/
+BuildRequires:	rpmbuild(macros) >= 1.461
 BuildArch:	noarch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
-%define		_appdir	/usr/share/php/%{name}
+%define		_appdir		%{php_data_dir}/%{name}
 
 %description
 PHP email transport class featuring multiple file attachments, SMTP
