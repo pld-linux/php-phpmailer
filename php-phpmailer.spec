@@ -1,14 +1,18 @@
+# TODO:
+# - separate version for php4
+# - better requires with proper php modules. 
 Summary:	Full featured email transfer class for PHP
 Summary(pl.UTF-8):	W pełni funkcjonalna klasa PHP do przesyłania e-maili
 Name:		phpmailer
-Version:	2.0.0
+Version:	2.2.1
 Release:	1
 License:	LGPL
 Group:		Development/Languages/PHP
-Source0:	http://dl.sourceforge.net/phpmailer/PHPMailer_v%{version}.tar.gz
-# Source0-md5:	1fba7b3b8f67197c371da2f791d517de
+Source0:	http://dl.sourceforge.net/phpmailer/phpMailer_v%{version}.tar.gz
+# Source0-md5:	9f9e9bca95fb11eee2d3e892778319d1
 URL:		http://phpmailer.codeworxtech.com/
 BuildRequires:	rpmbuild(macros) >= 1.461
+Requires:	php-common >= 5.0
 BuildArch:	noarch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -42,18 +46,18 @@ Documentation for %{name}.
 Dokumentacja do %{name}.
 
 %prep
-%setup -q -n PHPMailer_v%{version}
+%setup -q -c
 
 find '(' -name '*.php' -o -name '*.html' -o -name '*.txt' ')' -print0 | xargs -0 %{__sed} -i -e 's,\r$,,'
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT%{_appdir}/language
+install -d $RPM_BUILD_ROOT{%{_appdir}/language,%{_phpdocdir}/%{name}}
+
 cp -a *.php $RPM_BUILD_ROOT%{_appdir}
 cp -a language/*.php $RPM_BUILD_ROOT%{_appdir}/language
-
-install -d $RPM_BUILD_ROOT%{_phpdocdir}/%{name}
 cp -a phpdoc/* $RPM_BUILD_ROOT%{_phpdocdir}/%{name}
+cp -a examples  $RPM_BUILD_ROOT%{_phpdocdir}/%{name}
 
 %clean
 rm -rf $RPM_BUILD_ROOT
