@@ -1,5 +1,4 @@
 # TODO:
-# - separate version for php4
 # - better requires with proper php modules. 
 Summary:	Full featured email transfer class for PHP
 Summary(pl.UTF-8):	W pełni funkcjonalna klasa PHP do przesyłania e-maili
