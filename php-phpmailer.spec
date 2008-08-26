@@ -86,7 +86,7 @@ rm -rf $RPM_BUILD_ROOT
 %lang(it) %{_appdir}/language/phpmailer.lang-it.php
 %lang(ja) %{_appdir}/language/phpmailer.lang-ja.php
 %lang(nl) %{_appdir}/language/phpmailer.lang-nl.php
-%lang(no) %{_appdir}/language/phpmailer.lang-no.php
+%lang(nb) %{_appdir}/language/phpmailer.lang-no.php
 %lang(pl) %{_appdir}/language/phpmailer.lang-pl.php
 %lang(ro) %{_appdir}/language/phpmailer.lang-ro.php
 %lang(ru) %{_appdir}/language/phpmailer.lang-ru.php
