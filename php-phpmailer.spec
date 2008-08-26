@@ -1,5 +1,5 @@
 # TODO:
-# - better requires with proper php modules. 
+# - better requires with proper php modules.
 Summary:	Full featured email transfer class for PHP
 Summary(pl.UTF-8):	W pełni funkcjonalna klasa PHP do przesyłania e-maili
 Name:		phpmailer
@@ -56,7 +56,8 @@ install -d $RPM_BUILD_ROOT{%{_appdir}/language,%{_phpdocdir}/%{name}}
 cp -a *.php $RPM_BUILD_ROOT%{_appdir}
 cp -a language/*.php $RPM_BUILD_ROOT%{_appdir}/language
 cp -a phpdoc/* $RPM_BUILD_ROOT%{_phpdocdir}/%{name}
-cp -a examples  $RPM_BUILD_ROOT%{_phpdocdir}/%{name}
+install -d $RPM_BUILD_ROOT%{_examplesdir}/%{name}-%{version}
+cp -a examples/* $RPM_BUILD_ROOT%{_examplesdir}/%{name}-%{version}
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -64,7 +65,35 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(644,root,root,755)
 %doc ChangeLog.txt README LICENSE docs/*
-%{_appdir}
+%dir %{_appdir}
+%{_appdir}/class.phpmailer.php
+%{_appdir}/class.pop3.php
+%{_appdir}/class.smtp.php
+
+%dir %{_appdir}/language
+%{_appdir}/language/phpmailer.lang-en.php
+%lang(br) %{_appdir}/language/phpmailer.lang-br.php
+%lang(ca) %{_appdir}/language/phpmailer.lang-ca.php
+%lang(cz) %{_appdir}/language/phpmailer.lang-cz.php
+%lang(de) %{_appdir}/language/phpmailer.lang-de.php
+%lang(dk) %{_appdir}/language/phpmailer.lang-dk.php
+%lang(es) %{_appdir}/language/phpmailer.lang-es.php
+%lang(et) %{_appdir}/language/phpmailer.lang-et.php
+%lang(fi) %{_appdir}/language/phpmailer.lang-fi.php
+%lang(fo) %{_appdir}/language/phpmailer.lang-fo.php
+%lang(fr) %{_appdir}/language/phpmailer.lang-fr.php
+%lang(hu) %{_appdir}/language/phpmailer.lang-hu.php
+%lang(it) %{_appdir}/language/phpmailer.lang-it.php
+%lang(ja) %{_appdir}/language/phpmailer.lang-ja.php
+%lang(nl) %{_appdir}/language/phpmailer.lang-nl.php
+%lang(no) %{_appdir}/language/phpmailer.lang-no.php
+%lang(pl) %{_appdir}/language/phpmailer.lang-pl.php
+%lang(ro) %{_appdir}/language/phpmailer.lang-ro.php
+%lang(ru) %{_appdir}/language/phpmailer.lang-ru.php
+%lang(se) %{_appdir}/language/phpmailer.lang-se.php
+%lang(tr) %{_appdir}/language/phpmailer.lang-tr.php
+
+%{_examplesdir}/%{name}-%{version}
 
 %files phpdoc
 %defattr(644,root,root,755)
