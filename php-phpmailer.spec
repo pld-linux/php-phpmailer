@@ -12,7 +12,7 @@ Source0:	http://dl.sourceforge.net/phpmailer/phpMailer_v%{version}.tar.gz
 # Source0-md5:	9f9e9bca95fb11eee2d3e892778319d1
 URL:		http://phpmailer.codeworxtech.com/
 BuildRequires:	rpmbuild(macros) >= 1.461
-Requires:	php-common >= 5.0
+Requires:	php-common >= 4:5.0
 BuildArch:	noarch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
