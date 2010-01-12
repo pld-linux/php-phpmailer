@@ -2,23 +2,24 @@
 # - better requires with proper php modules.
 Summary:	Full featured email transfer class for PHP
 Summary(pl.UTF-8):	W pełni funkcjonalna klasa PHP do przesyłania e-maili
-Name:		phpmailer
+Name:		php-phpmailer
 Version:	2.2.1
 Release:	1
 License:	LGPL
 Group:		Development/Languages/PHP
-Source0:	http://dl.sourceforge.net/phpmailer/phpMailer_v%{version}.tar.gz
-# Source0-md5:	9f9e9bca95fb11eee2d3e892778319d1
+Source0:	http://dl.sourceforge.net/phpmailer/phpMailer_v%{version}_.tar.gz
+# Source0-md5:	0bf75c1bcef8bde6adbebcdc69f1a02d
 URL:		http://phpmailer.codeworxtech.com/
 BuildRequires:	rpmbuild(macros) >= 1.461
 Requires:	php-common >= 4:5.0
+Obsoletes:	php-phpmailer
 BuildArch:	noarch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 # _phpdocdir / php_docdir / phpdoc_dir ?
 %define		_phpdocdir		%{_docdir}/phpdoc
 
-%define		_appdir			%{php_data_dir}/%{name}
+%define		_appdir			%{php_data_dir}/phpmailer
 
 %description
 PHP email transport class featuring multiple file attachments, SMTP
@@ -33,16 +34,16 @@ itp. Potrafi wysyłać pocztę przez sendmaila, funkcją PHP mail() albo
 poprzez SMTP. Metody są oparte na popularnym komponencie AspEmail.
 
 %package phpdoc
-Summary:	Online manual for %{name}
-Summary(pl.UTF-8):	Dokumentacja online do %{name}
+Summary:	Online manual for phpMailer
+Summary(pl.UTF-8):	Dokumentacja online do phpMailer
 Group:		Documentation
 Requires:	php-dirs
 
 %description phpdoc
-Documentation for %{name}.
+Documentation for phpMailer.
 
 %description phpdoc -l pl.UTF-8
-Dokumentacja do %{name}.
+Dokumentacja do phpMailer.
 
 %prep
 %setup -q -c
@@ -51,11 +52,11 @@ find '(' -name '*.php' -o -name '*.html' -o -name '*.txt' ')' -print0 | xargs -0
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT{%{_appdir}/language,%{_phpdocdir}/%{name}}
+install -d $RPM_BUILD_ROOT{%{_appdir}/language,%{_phpdocdir}/phpmailer}
 
 cp -a *.php $RPM_BUILD_ROOT%{_appdir}
 cp -a language/*.php $RPM_BUILD_ROOT%{_appdir}/language
-cp -a phpdoc/* $RPM_BUILD_ROOT%{_phpdocdir}/%{name}
+cp -a phpdoc/* $RPM_BUILD_ROOT%{_phpdocdir}/phpmailer
 install -d $RPM_BUILD_ROOT%{_examplesdir}/%{name}-%{version}
 cp -a examples/* $RPM_BUILD_ROOT%{_examplesdir}/%{name}-%{version}
 
@@ -97,4 +98,4 @@ rm -rf $RPM_BUILD_ROOT
 
 %files phpdoc
 %defattr(644,root,root,755)
-%{_phpdocdir}/%{name}
+%{_phpdocdir}/phpmailer
