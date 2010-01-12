@@ -10,6 +10,7 @@ Group:		Development/Languages/PHP
 Source0:	http://dl.sourceforge.net/phpmailer/phpMailer_v%{version}.tar.gz
 # Source0-md5:	897f53ab746c48f372364b7745d8d468
 Patch0:		paths.patch
+Patch1:		phpmailer-update-et.patch
 URL:		http://phpmailer.codeworxtech.com/
 BuildRequires:	rpm-php-pearprov >= 4.4.2-11
 BuildRequires:	rpmbuild(macros) >= 1.520
@@ -42,6 +43,7 @@ poprzez SMTP. Metody są oparte na popularnym komponencie AspEmail.
 %prep
 %setup -q -n phpMailer_v%{version}
 %patch0 -p1
+%patch1 -p1
 
 find '(' -name '*.php' -o -name '*.html' -o -name '*.txt' ')' -print0 | xargs -0 %{__sed} -i -e 's,\r$,,'
 %{__sed} -i -e 's,\r$,,' README LICENSE

@@ -1,0 +1,13 @@
+--- phpmailer/language/phpmailer.lang-et.php~	2010-01-12 16:08:02.000000000 +0200
++++ phpmailer/language/phpmailer.lang-et.php	2010-01-12 16:25:39.874296467 +0200
+@@ -18,7 +18,5 @@
+ $PHPMAILER_LANG["connect_host"]         = 'SMTP Viga: Ei &otilde;nnestunud luua &uuml;hendust SMTP serveriga.';
+ $PHPMAILER_LANG["file_access"]          = 'Pole piisavalt &otilde;iguseid j&auml;rgneva faili avamiseks: ';
+ $PHPMAILER_LANG["file_open"]            = 'Faili Viga: Faili avamine eba&otilde;nnestus: ';
+-$PHPMAILER_LANG["encoding"]             = 'Tundmatu Unknown kodeering: ';
+-$PHPMAILER_LANG["signing"]              = 'Signing Error: ';
+-
+-?>
+\ No newline at end of file
++$PHPMAILER_LANG["encoding"]             = 'Tundmatu kodeering: ';
++$PHPMAILER_LANG["signing"]              = 'Viga allkirjastamisel: ';
