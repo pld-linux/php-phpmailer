@@ -1,5 +1,5 @@
-# TODO:
-# - better requires with proper php modules.
+%define		php_min_version 5.1.0
+%include	/usr/lib/rpm/macros.php
 Summary:	Full featured email transfer class for PHP
 Summary(pl.UTF-8):	W pełni funkcjonalna klasa PHP do przesyłania e-maili
 Name:		php-phpmailer
@@ -9,15 +9,23 @@ License:	LGPL
 Group:		Development/Languages/PHP
 Source0:	http://dl.sourceforge.net/phpmailer/phpMailer_v%{version}.tar.gz
 # Source0-md5:	897f53ab746c48f372364b7745d8d468
-URL:		http://phpmailer.codeworxtech.com/
-BuildRequires:	rpmbuild(macros) >= 1.461
-Requires:	php-common >= 4:5.0
-Obsoletes:	phpmailer
 Patch0:		paths.patch
+URL:		http://phpmailer.codeworxtech.com/
+BuildRequires:	rpm-php-pearprov >= 4.4.2-11
+BuildRequires:	rpmbuild(macros) >= 1.520
+Requires:	php-common >= 4:%{php_min_version}
+Requires:	php-pcre
+Suggests:	php-hash
+Suggests:	php-mbstring
+Suggests:	php-openssl
+Obsoletes:	phpmailer
 BuildArch:	noarch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		_appdir		%{php_data_dir}/phpmailer
+
+# Exclude optional PHP extension dependencies
+%define		_noautoreq	php-hash php-openssl php-mbstring
 
 %description
 PHP email transport class featuring multiple file attachments, SMTP
