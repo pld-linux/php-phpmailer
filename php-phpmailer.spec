@@ -4,10 +4,10 @@ Summary:	Full featured email transfer class for PHP
 Summary(pl.UTF-8):	W pełni funkcjonalna klasa PHP do przesyłania e-maili
 Name:		php-phpmailer
 Version:	2.3
-Release:	1
+Release:	2
 License:	LGPL
 Group:		Development/Languages/PHP
-Source0:	http://dl.sourceforge.net/phpmailer/phpMailer_v%{version}.tar.gz
+Source0:	http://downloads.sourceforge.net/phpmailer/phpMailer_v%{version}.tar.gz
 # Source0-md5:	897f53ab746c48f372364b7745d8d468
 Patch0:		paths.patch
 Patch1:		phpmailer-update-et.patch
@@ -15,8 +15,8 @@ URL:		http://phpmailer.codeworxtech.com/
 BuildRequires:	rpm-php-pearprov >= 4.4.2-11
 BuildRequires:	rpmbuild(macros) >= 1.520
 Requires:	php-common >= 4:%{php_min_version}
+Requires:	php-date
 Requires:	php-pcre
-Suggests:	php-hash
 Suggests:	php-mbstring
 Suggests:	php-openssl
 Obsoletes:	phpmailer
@@ -26,7 +26,7 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 %define		_appdir		%{php_data_dir}/phpmailer
 
 # Exclude optional PHP extension dependencies
-%define		_noautoreq	php-hash php-openssl php-mbstring
+%define		_noautoreq	php-openssl php-mbstring
 
 %description
 PHP email transport class featuring multiple file attachments, SMTP
