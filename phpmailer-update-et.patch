@@ -1,3 +1,6 @@
+Bugreport-URL: https://sourceforge.net/tracker/?func=detail&aid=3007409&group_id=26031&atid=385709
+Signed-off-by: Elan Ruusamäe <glen@delfi.ee>
+
 --- PHPMailer_v5.1/language/phpmailer.lang-et.php~	2010-05-26 17:41:44.000000000 +0300
 +++ PHPMailer_v5.1/language/phpmailer.lang-et.php	2010-05-26 17:42:42.706466459 +0300
 @@ -3,24 +3,24 @@
