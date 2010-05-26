@@ -1,17 +1,17 @@
-%define		php_min_version 5.1.0
+%define		php_min_version 5.2.0
 %include	/usr/lib/rpm/macros.php
 Summary:	Full featured email transfer class for PHP
 Summary(pl.UTF-8):	W pełni funkcjonalna klasa PHP do przesyłania e-maili
 Name:		php-phpmailer
-Version:	2.3
-Release:	2
-License:	LGPL
+Version:	5.1
+Release:	1
+License:	LGPL v2.1
 Group:		Development/Languages/PHP
-Source0:	http://downloads.sourceforge.net/phpmailer/phpMailer_v%{version}.tar.gz
-# Source0-md5:	897f53ab746c48f372364b7745d8d468
+Source0:	http://downloads.sourceforge.net/project/phpmailer/phpmailer%20for%20php5_6/PHPMailer%20v%{version}/PHPMailer_v%{version}.tar.gz
+# Source0-md5:	6e81fc229f88f7d9dd7cf70d65296ef8
 Patch0:		paths.patch
 Patch1:		phpmailer-update-et.patch
-URL:		http://phpmailer.codeworxtech.com/
+URL:		http://phpmailer.worxware.com/index.php?pg=phpmailer
 BuildRequires:	rpm-php-pearprov >= 4.4.2-11
 BuildRequires:	rpmbuild(macros) >= 1.520
 Requires:	php-common >= 4:%{php_min_version}
@@ -25,8 +25,11 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		_appdir		%{php_data_dir}/phpmailer
 
-# Exclude optional PHP extension dependencies
-%define		_noautoreq	php-openssl php-mbstring
+# exclude optional php dependencies
+%define		_noautophp	php-openssl php-mbstring php-filter
+
+# put it together for rpmbuild
+%define		_noautoreq	%{?_noautophp} %{?_noautopear}
 
 %description
 PHP email transport class featuring multiple file attachments, SMTP
@@ -41,7 +44,7 @@ itp. Potrafi wysyłać pocztę przez sendmaila, funkcją PHP mail() albo
 poprzez SMTP. Metody są oparte na popularnym komponencie AspEmail.
 
 %prep
-%setup -q -n phpMailer_v%{version}
+%setup -q -n PHPMailer_v%{version}
 %patch0 -p1
 %patch1 -p1
 
@@ -67,16 +70,16 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc ChangeLog.txt README LICENSE docs/*
+%doc changelog.txt README docs/*
 %{php_data_dir}/class.phpmailer.php
 
 %dir %{_appdir}
 %{_appdir}/class.pop3.php
 %{_appdir}/class.smtp.php
 %dir %{_appdir}/language
-%{_appdir}/language/phpmailer.lang-en.php
 %lang(ar) %{_appdir}/language/phpmailer.lang-ar.php
 %lang(ca) %{_appdir}/language/phpmailer.lang-ca.php
+%lang(ch) %{_appdir}/language/phpmailer.lang-ch.php
 %lang(cs) %{_appdir}/language/phpmailer.lang-cz.php
 %lang(da) %{_appdir}/language/phpmailer.lang-dk.php
 %lang(de) %{_appdir}/language/phpmailer.lang-de.php
@@ -96,5 +99,7 @@ rm -rf $RPM_BUILD_ROOT
 %lang(ru) %{_appdir}/language/phpmailer.lang-ru.php
 %lang(sv) %{_appdir}/language/phpmailer.lang-se.php
 %lang(tr) %{_appdir}/language/phpmailer.lang-tr.php
+%lang(zh) %{_appdir}/language/phpmailer.lang-zh.php
+%lang(zh_CN) %{_appdir}/language/phpmailer.lang-zh_cn.php
 
 %{_examplesdir}/%{name}-%{version}

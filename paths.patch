@@ -1,5 +1,5 @@
---- phpMailer_v2.3/class.phpmailer.php~	2010-01-12 16:05:45.000000000 +0200
-+++ phpMailer_v2.3/class.phpmailer.php	2010-01-12 16:05:46.997539898 +0200
+--- PHPMailer_v5.1/class.phpmailer.php~	2010-05-26 17:37:24.000000000 +0300
++++ PHPMailer_v5.1/class.phpmailer.php	2010-05-26 17:37:48.416133079 +0300
 @@ -134,7 +134,7 @@
     * is in a different directory than the PHP include path.
     * @var string
@@ -9,12 +9,12 @@
  
    /**
     * Holds PHPMailer version.
-@@ -663,7 +663,7 @@
-    * @access public
-    * @return bool
-    */
--  function SetLanguage($lang_type = 'en', $lang_path = 'language/') {
-+  function SetLanguage($lang_type = 'en', $lang_path = '/usr/share/php/phpmailer/language/') {
-     if( !(@include $lang_path.'phpmailer.lang-'.$lang_type.'.php') ) {
-       $PHPMAILER_LANG = array();
-       $PHPMAILER_LANG["provide_address"]      = 'You must provide at least one ' .
+@@ -847,7 +847,7 @@
+   * @param string $lang_path Path to the language file directory
+   * @access public
+   */
+-  function SetLanguage($langcode = 'en', $lang_path = 'language/') {
++  function SetLanguage($langcode = 'en', $lang_path = '/usr/share/php/phpmailer/language/') {
+     //Define full set of translatable strings
+     $PHPMAILER_LANG = array(
+       'provide_address' => 'You must provide at least one recipient email address.',
