@@ -3,15 +3,15 @@
 Summary:	Full featured email transfer class for PHP
 Summary(pl.UTF-8):	W pełni funkcjonalna klasa PHP do przesyłania e-maili
 Name:		php-phpmailer
-Version:	5.1
+Version:	5.2.0
 Release:	1
 License:	LGPL v2.1
 Group:		Development/Languages/PHP
-Source0:	http://downloads.sourceforge.net/project/phpmailer/phpmailer%20for%20php5_6/PHPMailer%20v%{version}/PHPMailer_v%{version}.tar.gz
-# Source0-md5:	6e81fc229f88f7d9dd7cf70d65296ef8
+Source0:	http://phpmailer.apache-extras.org.codespot.com/files/PHPMailer_%{version}.tgz
+# Source0-md5:	aed567b80e6a3b3175d4ce27f3a9a243
 Patch0:		paths.patch
 Patch1:		phpmailer-update-et.patch
-URL:		http://phpmailer.worxware.com/index.php?pg=phpmailer
+URL:		http://code.google.com/a/apache-extras.org/p/phpmailer/
 BuildRequires:	rpm-php-pearprov >= 4.4.2-11
 BuildRequires:	rpmbuild(macros) >= 1.520
 Requires:	php-common >= 4:%{php_min_version}
@@ -44,7 +44,7 @@ itp. Potrafi wysyłać pocztę przez sendmaila, funkcją PHP mail() albo
 poprzez SMTP. Metody są oparte na popularnym komponencie AspEmail.
 
 %prep
-%setup -q -n PHPMailer_v%{version}
+%setup -q -n PHPMailer_%{version}
 %patch0 -p1
 %patch1 -p1
 
