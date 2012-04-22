@@ -11,9 +11,10 @@ Source0:	http://phpmailer.apache-extras.org.codespot.com/files/PHPMailer_%{versi
 # Source0-md5:	2ef9a089aa9aae9899b4ab785ef873c3
 Patch0:		paths.patch
 Patch1:		phpmailer-update-et.patch
+Patch2:		tests.patch
 URL:		http://code.google.com/a/apache-extras.org/p/phpmailer/
 BuildRequires:	rpm-php-pearprov >= 4.4.2-11
-BuildRequires:	rpmbuild(macros) >= 1.520
+BuildRequires:	rpmbuild(macros) >= 1.553
 Requires:	php-common >= 4:%{php_min_version}
 Requires:	php-date
 Requires:	php-pcre
@@ -47,19 +48,19 @@ poprzez SMTP. Metody są oparte na popularnym komponencie AspEmail.
 %setup -q -n PHPMailer_%{version}
 %patch0 -p1
 %patch1 -p1
+%patch2 -p1
 
-find '(' -name '*.php' -o -name '*.html' -o -name '*.txt' ')' -print0 | xargs -0 %{__sed} -i -e 's,\r$,,'
-%{__sed} -i -e 's,\r$,,' README LICENSE
+%undos -f php,html,txt README LICENSE
 
 %install
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT%{_appdir}/language
 
-cp -a class.phpmailer.php $RPM_BUILD_ROOT%{php_data_dir}
+cp -p class.phpmailer.php $RPM_BUILD_ROOT%{php_data_dir}
 # plugins: for smtp and pop before smtp auth
-cp -a class.{smtp,pop3}.php  $RPM_BUILD_ROOT%{_appdir}
+cp -p class.{smtp,pop3}.php  $RPM_BUILD_ROOT%{_appdir}
 # language: translations of error messages
-cp -a language/*.php $RPM_BUILD_ROOT%{_appdir}/language
+cp -p language/*.php $RPM_BUILD_ROOT%{_appdir}/language
 
 # examples
 install -d $RPM_BUILD_ROOT%{_examplesdir}/%{name}-%{version}
