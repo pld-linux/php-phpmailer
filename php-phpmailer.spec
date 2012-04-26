@@ -1,8 +1,9 @@
+%define		pkgname	phpmailer
 %define		php_min_version 5.2.0
 %include	/usr/lib/rpm/macros.php
 Summary:	Full featured email transfer class for PHP
 Summary(pl.UTF-8):	W pełni funkcjonalna klasa PHP do przesyłania e-maili
-Name:		php-phpmailer
+Name:		php-%{pkgname}
 Version:	5.2.1
 Release:	2
 License:	LGPL v2.1
@@ -24,7 +25,8 @@ Obsoletes:	phpmailer
 BuildArch:	noarch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
-%define		_appdir		%{php_data_dir}/phpmailer
+%define		_appdir		%{php_data_dir}/%{pkgname}
+%define		_phpdocdir	%{_docdir}/phpdoc
 
 # exclude optional php dependencies
 %define		_noautophp	php-openssl php-mbstring php-filter
@@ -44,6 +46,18 @@ plikowych, serwery SMTP, CC, BCC, wiadomości HTML, zawijanie linii
 itp. Potrafi wysyłać pocztę przez sendmaila, funkcją PHP mail() albo
 poprzez SMTP. Metody są oparte na popularnym komponencie AspEmail.
 
+%package phpdoc
+Summary:	Online manual for %{name}
+Summary(pl.UTF-8):	Dokumentacja online do %{name}
+Group:		Documentation
+Requires:	php-dirs
+
+%description phpdoc
+Documentation for %{name}.
+
+%description phpdoc -l pl.UTF-8
+Dokumentacja do %{name}.
+
 %prep
 %setup -q -n PHPMailer_%{version}
 %patch0 -p1
@@ -51,6 +65,8 @@ poprzez SMTP. Metody są oparte na popularnym komponencie AspEmail.
 %patch2 -p1
 
 %undos -f php,html,txt README LICENSE
+
+mv docs/5.0-phpdocs phpdoc
 
 %install
 rm -rf $RPM_BUILD_ROOT
@@ -68,6 +84,10 @@ cp -a extras $RPM_BUILD_ROOT%{_appdir}
 # examples
 install -d $RPM_BUILD_ROOT%{_examplesdir}/%{name}-%{version}
 cp -a examples/* $RPM_BUILD_ROOT%{_examplesdir}/%{name}-%{version}
+
+# api doc
+install -d $RPM_BUILD_ROOT%{_phpdocdir}/%{pkgname}
+cp -a phpdoc/* $RPM_BUILD_ROOT%{_phpdocdir}/%{pkgname}
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -110,3 +130,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_appdir}/extras/htmlfilter.php
 
 %{_examplesdir}/%{name}-%{version}
+
+%files phpdoc
+%defattr(644,root,root,755)
+%{_phpdocdir}/%{pkgname}
