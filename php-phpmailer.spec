@@ -14,6 +14,7 @@ Patch0:		paths.patch
 Patch1:		phpmailer-update-et.patch
 Patch2:		tests.patch
 URL:		http://code.google.com/a/apache-extras.org/p/phpmailer/
+BuildRequires:	php-pear-PhpDocumentor
 BuildRequires:	rpm-php-pearprov >= 4.4.2-11
 BuildRequires:	rpmbuild(macros) >= 1.553
 Requires:	php-common >= 4:%{php_min_version}
@@ -66,7 +67,19 @@ Dokumentacja do %{name}.
 
 %undos -f php,html,txt README LICENSE
 
-mv docs/5.0-phpdocs phpdoc
+mv docs/5.0-phpdocs phpdoc.orig
+
+%build
+phpdoc --title 'PHPMailer version %{version}' --target phpdoc --defaultpackagename PHPMailer -f 'class.*.php'
+# nuke smarty cache
+rm -rf phpdoc/????????????????????????????????
+rm -rf phpdoc/*/????????????????????????????????
+
+# copy images, phpdoc is likely buggy not doing itself
+sdir=%{php_pear_dir}/data/PhpDocumentor/phpDocumentor/Converters/HTML/frames/templates/earthli/templates/media/images
+install -d phpdoc/media/images
+cp -a $sdir/Constant.png phpdoc/media/images
+cp -a $sdir/Variable.png phpdoc/media/images
 
 %install
 rm -rf $RPM_BUILD_ROOT
