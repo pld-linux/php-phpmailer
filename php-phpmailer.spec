@@ -4,7 +4,7 @@ Summary:	Full featured email transfer class for PHP
 Summary(pl.UTF-8):	W pełni funkcjonalna klasa PHP do przesyłania e-maili
 Name:		php-phpmailer
 Version:	5.2.1
-Release:	1
+Release:	2
 License:	LGPL v2.1
 Group:		Development/Languages/PHP
 Source0:	http://phpmailer.apache-extras.org.codespot.com/files/PHPMailer_%{version}.tgz
@@ -62,6 +62,9 @@ cp -p class.{smtp,pop3}.php  $RPM_BUILD_ROOT%{_appdir}
 # language: translations of error messages
 cp -p language/*.php $RPM_BUILD_ROOT%{_appdir}/language
 
+# extras: htmlfilter.php
+cp -a extras $RPM_BUILD_ROOT%{_appdir}
+
 # examples
 install -d $RPM_BUILD_ROOT%{_examplesdir}/%{name}-%{version}
 cp -a examples/* $RPM_BUILD_ROOT%{_examplesdir}/%{name}-%{version}
@@ -102,5 +105,8 @@ rm -rf $RPM_BUILD_ROOT
 %lang(tr) %{_appdir}/language/phpmailer.lang-tr.php
 %lang(zh) %{_appdir}/language/phpmailer.lang-zh.php
 %lang(zh_CN) %{_appdir}/language/phpmailer.lang-zh_cn.php
+
+%dir %{_appdir}/extras
+%{_appdir}/extras/htmlfilter.php
 
 %{_examplesdir}/%{name}-%{version}
