@@ -1,17 +1,17 @@
 %define		pkgname	phpmailer
 %define		php_min_version 5.2.0
-%define		subver	beta1
+%define		subver	beta2
 %include	/usr/lib/rpm/macros.php
 Summary:	Full featured email transfer class for PHP
 Summary(pl.UTF-8):	W pełni funkcjonalna klasa PHP do przesyłania e-maili
 Name:		php-%{pkgname}
 Version:	5.2.2
-Release:	0.%{subver}.2
+Release:	0.%{subver}.1
 License:	LGPL v2.1
 Group:		Development/Languages/PHP
 #Source0:	http://phpmailer.apache-extras.org.codespot.com/files/PHPMailer_%{version}.tgz
 Source0:	http://phpmailer.apache-extras.org.codespot.com/files/PHPMailer_%{version}-%{subver}.tgz
-# Source0-md5:	67bbd48cb35ed070c636b7ad67daaca1
+# Source0-md5:	286d49c243aaf299c58d00c02623b3eb
 Patch0:		paths.patch
 URL:		http://code.google.com/a/apache-extras.org/p/phpmailer/
 BuildRequires:	php-pear-PhpDocumentor
