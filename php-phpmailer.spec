@@ -16,10 +16,10 @@ BuildRequires:	php-pear-PhpDocumentor
 BuildRequires:	rpm-php-pearprov >= 4.4.2-11
 BuildRequires:	rpmbuild(macros) >= 1.553
 Requires:	php(core) >= %{php_min_version}
+Requires:	php(date)
 Requires:	php(pcre)
-Requires:	php-date
-Suggests:	php-mbstring
-Suggests:	php-openssl
+Suggests:	php(mbstring)
+Suggests:	php(openssl)
 Obsoletes:	phpmailer
 BuildArch:	noarch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
