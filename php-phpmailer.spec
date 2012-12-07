@@ -4,15 +4,13 @@
 Summary:	Full featured email transfer class for PHP
 Summary(pl.UTF-8):	W pełni funkcjonalna klasa PHP do przesyłania e-maili
 Name:		php-%{pkgname}
-Version:	5.2.1
-Release:	4
+Version:	5.2.2
+Release:	1
 License:	LGPL v2.1
 Group:		Development/Languages/PHP
 Source0:	http://phpmailer.apache-extras.org.codespot.com/files/PHPMailer_%{version}.tgz
-# Source0-md5:	2ef9a089aa9aae9899b4ab785ef873c3
+# Source0-md5:	8c4b4a76641edfc89e3f3424da649b62
 Patch0:		paths.patch
-Patch1:		phpmailer-update-et.patch
-Patch2:		tests.patch
 URL:		http://code.google.com/a/apache-extras.org/p/phpmailer/
 BuildRequires:	php-pear-PhpDocumentor
 BuildRequires:	rpm-php-pearprov >= 4.4.2-11
@@ -31,6 +29,9 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 # exclude optional php dependencies
 %define		_noautophp	php-openssl php-mbstring php-filter
+
+# bad depsolver
+%define		_noautopear	pear(ntlm_sasl_client.php)
 
 # put it together for rpmbuild
 %define		_noautoreq	%{?_noautophp} %{?_noautopear}
@@ -60,15 +61,14 @@ Documentation for %{name}.
 Dokumentacja do %{name}.
 
 %prep
-%setup -q -n PHPMailer_%{version}
+%setup -q -n PHPMailer_%{version}%{?subver:-%{subver}}
 %patch0 -p1
-%patch1 -p1
-%patch2 -p1
 
 %undos -f php,html,txt README LICENSE
 
-mv docs/5.0-phpdocs phpdoc.orig
+mv docs/phpdoc .
 
+%if 0
 %build
 phpdoc --title 'PHPMailer version %{version}' --target phpdoc --defaultpackagename PHPMailer -f 'class.*.php'
 # nuke smarty cache
@@ -80,6 +80,7 @@ sdir=%{php_pear_dir}/data/PhpDocumentor/phpDocumentor/Converters/HTML/frames/tem
 install -d phpdoc/media/images
 cp -a $sdir/Constant.png phpdoc/media/images
 cp -a $sdir/Variable.png phpdoc/media/images
+%endif
 
 %install
 rm -rf $RPM_BUILD_ROOT
@@ -91,7 +92,7 @@ cp -p class.{smtp,pop3}.php  $RPM_BUILD_ROOT%{_appdir}
 # language: translations of error messages
 cp -p language/*.php $RPM_BUILD_ROOT%{_appdir}/language
 
-# extras: htmlfilter.php
+# extras: htmlfilter.php, ntlm_sasl_client.php
 cp -a extras $RPM_BUILD_ROOT%{_appdir}
 
 # examples
@@ -134,13 +135,16 @@ rm -rf $RPM_BUILD_ROOT
 %lang(pt_BR) %{_appdir}/language/phpmailer.lang-br.php
 %lang(ro) %{_appdir}/language/phpmailer.lang-ro.php
 %lang(ru) %{_appdir}/language/phpmailer.lang-ru.php
+%lang(sk) %{_appdir}/language/phpmailer.lang-sk.php
 %lang(sv) %{_appdir}/language/phpmailer.lang-se.php
 %lang(tr) %{_appdir}/language/phpmailer.lang-tr.php
 %lang(zh) %{_appdir}/language/phpmailer.lang-zh.php
 %lang(zh_CN) %{_appdir}/language/phpmailer.lang-zh_cn.php
 
 %dir %{_appdir}/extras
+%{_appdir}/extras/class.html2text.inc
 %{_appdir}/extras/htmlfilter.php
+%{_appdir}/extras/ntlm_sasl_client.php
 
 %{_examplesdir}/%{name}-%{version}
 
