@@ -1,17 +1,15 @@
 %define		pkgname	phpmailer
 %define		php_min_version 5.2.0
-%define		subver	beta2
 %include	/usr/lib/rpm/macros.php
 Summary:	Full featured email transfer class for PHP
 Summary(pl.UTF-8):	W pełni funkcjonalna klasa PHP do przesyłania e-maili
 Name:		php-%{pkgname}
 Version:	5.2.2
-Release:	0.%{subver}.1
+Release:	1
 License:	LGPL v2.1
 Group:		Development/Languages/PHP
-#Source0:	http://phpmailer.apache-extras.org.codespot.com/files/PHPMailer_%{version}.tgz
-Source0:	http://phpmailer.apache-extras.org.codespot.com/files/PHPMailer_%{version}-%{subver}.tgz
-# Source0-md5:	286d49c243aaf299c58d00c02623b3eb
+Source0:	http://phpmailer.apache-extras.org.codespot.com/files/PHPMailer_%{version}.tgz
+# Source0-md5:	8c4b4a76641edfc89e3f3424da649b62
 Patch0:		paths.patch
 URL:		http://code.google.com/a/apache-extras.org/p/phpmailer/
 BuildRequires:	php-pear-PhpDocumentor
@@ -137,6 +135,7 @@ rm -rf $RPM_BUILD_ROOT
 %lang(pt_BR) %{_appdir}/language/phpmailer.lang-br.php
 %lang(ro) %{_appdir}/language/phpmailer.lang-ro.php
 %lang(ru) %{_appdir}/language/phpmailer.lang-ru.php
+%lang(sk) %{_appdir}/language/phpmailer.lang-sk.php
 %lang(sv) %{_appdir}/language/phpmailer.lang-se.php
 %lang(tr) %{_appdir}/language/phpmailer.lang-tr.php
 %lang(zh) %{_appdir}/language/phpmailer.lang-zh.php
