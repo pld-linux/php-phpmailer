@@ -4,12 +4,12 @@
 Summary:	Full featured email transfer class for PHP
 Summary(pl.UTF-8):	W pełni funkcjonalna klasa PHP do przesyłania e-maili
 Name:		php-%{pkgname}
-Version:	5.2.3
-Release:	0.1
+Version:	5.2.4
+Release:	1
 License:	LGPL v2.1
 Group:		Development/Languages/PHP
 Source0:	http://phpmailer.apache-extras.org.codespot.com/files/PHPMailer_%{version}.tgz
-# Source0-md5:	3a58ec1bae3f0c515e0adec03fd7c156
+# Source0-md5:	c990db0d0859599eafa4338ce90154a7
 Patch0:		paths.patch
 URL:		http://code.google.com/a/apache-extras.org/p/phpmailer/
 #BuildRequires:	php-pear-PhpDocumentor
