@@ -1,5 +1,5 @@
---- PHPMailer_v5.1/class.phpmailer.php~	2010-05-26 17:37:24.000000000 +0300
-+++ PHPMailer_v5.1/class.phpmailer.php	2010-05-26 17:37:48.416133079 +0300
+--- PHPMailer-5.2.5/class.phpmailer.php~	2013-05-24 09:51:19.087751571 +0300
++++ PHPMailer-5.2.5/class.phpmailer.php	2013-05-24 09:52:08.203626736 +0300
 @@ -134,7 +134,7 @@
     * is in a different directory than the PHP include path.
     * @var string
@@ -9,12 +9,12 @@
  
    /**
     * Holds PHPMailer version.
-@@ -847,7 +847,7 @@
-   * @param string $lang_path Path to the language file directory
-   * @access public
-   */
+@@ -1134,7 +1134,7 @@
+    * @return bool
+    * @access public
+    */
 -  function SetLanguage($langcode = 'en', $lang_path = 'language/') {
 +  function SetLanguage($langcode = 'en', $lang_path = '/usr/share/php/phpmailer/language/') {
      //Define full set of translatable strings
      $PHPMAILER_LANG = array(
-       'provide_address' => 'You must provide at least one recipient email address.',
+       'authenticate'         => 'SMTP Error: Could not authenticate.',

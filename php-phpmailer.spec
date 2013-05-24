@@ -1,23 +1,24 @@
 %define		pkgname	phpmailer
-%define		php_min_version 5.2.0
+%define		php_min_version 5.2.4
 %include	/usr/lib/rpm/macros.php
 Summary:	Full featured email transfer class for PHP
 Summary(pl.UTF-8):	W pełni funkcjonalna klasa PHP do przesyłania e-maili
 Name:		php-%{pkgname}
-Version:	5.2.4
+Version:	5.2.5
 Release:	1
 License:	LGPL v2.1
 Group:		Development/Languages/PHP
-Source0:	http://phpmailer.apache-extras.org.codespot.com/files/PHPMailer_%{version}.tgz
-# Source0-md5:	c990db0d0859599eafa4338ce90154a7
+Source0:	https://github.com/PHPMailer/PHPMailer/archive/v%{version}.tar.gz
+# Source0-md5:	a1e978a05ce0445083919e2829e57149
 Patch0:		paths.patch
-URL:		http://code.google.com/a/apache-extras.org/p/phpmailer/
-#BuildRequires:	php-pear-PhpDocumentor
+URL:		https://github.com/PHPMailer/PHPMailer
+BuildRequires:	php-pear-PhpDocumentor
 BuildRequires:	rpm-php-pearprov >= 4.4.2-11
-BuildRequires:	rpmbuild(macros) >= 1.654
+BuildRequires:	rpmbuild(macros) >= 1.663
 Requires:	php(core) >= %{php_min_version}
 Requires:	php(date)
 Requires:	php(pcre)
+Suggests:	php(hash)
 Suggests:	php(mbstring)
 Suggests:	php(openssl)
 Obsoletes:	phpmailer
@@ -28,10 +29,10 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 %define		_phpdocdir	%{_docdir}/phpdoc
 
 # exclude optional php dependencies
-%define		_noautophp	php-openssl php-mbstring php-filter
+%define		_noautophp	php-openssl php-mbstring php-filter php-hash
 
 # bad depsolver
-%define		_noautoreq_pear ntlm_sasl_client.php
+%define		_noautoreq_pear extras/ntlm_sasl_client.php extras/class.html2text.php
 
 # put it together for rpmbuild
 %define		_noautoreq	%{?_noautophp}
@@ -61,14 +62,9 @@ Documentation for %{name}.
 Dokumentacja do %{name}.
 
 %prep
-%setup -q -n PHPMailer_%{version}%{?subver:-%{subver}}
+%setup -q -n PHPMailer-%{version}%{?subver:-%{subver}}
 %patch0 -p1
 
-%undos -f php,html,txt README LICENSE
-
-mv docs/phpdoc .
-
-%if 0
 %build
 phpdoc --title 'PHPMailer version %{version}' --target phpdoc --defaultpackagename PHPMailer -f 'class.*.php'
 # nuke smarty cache
@@ -80,7 +76,6 @@ sdir=%{php_pear_dir}/data/PhpDocumentor/phpDocumentor/Converters/HTML/frames/tem
 install -d phpdoc/media/images
 cp -a $sdir/Constant.png phpdoc/media/images
 cp -a $sdir/Variable.png phpdoc/media/images
-%endif
 
 %install
 rm -rf $RPM_BUILD_ROOT
@@ -108,7 +103,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc changelog.txt README docs/*
+%doc README.md changelog.md docs/*
 %{php_data_dir}/class.phpmailer.php
 
 %dir %{_appdir}
@@ -121,11 +116,13 @@ rm -rf $RPM_BUILD_ROOT
 %lang(cs) %{_appdir}/language/phpmailer.lang-cz.php
 %lang(da) %{_appdir}/language/phpmailer.lang-dk.php
 %lang(de) %{_appdir}/language/phpmailer.lang-de.php
+%lang(eo) %{_appdir}/language/phpmailer.lang-eo.php
 %lang(es) %{_appdir}/language/phpmailer.lang-es.php
 %lang(et) %{_appdir}/language/phpmailer.lang-et.php
 %lang(fi) %{_appdir}/language/phpmailer.lang-fi.php
 %lang(fo) %{_appdir}/language/phpmailer.lang-fo.php
 %lang(fr) %{_appdir}/language/phpmailer.lang-fr.php
+%lang(he) %{_appdir}/language/phpmailer.lang-he.php
 %lang(hu) %{_appdir}/language/phpmailer.lang-hu.php
 %lang(it) %{_appdir}/language/phpmailer.lang-it.php
 %lang(ja) %{_appdir}/language/phpmailer.lang-ja.php
@@ -142,7 +139,7 @@ rm -rf $RPM_BUILD_ROOT
 %lang(zh_CN) %{_appdir}/language/phpmailer.lang-zh_cn.php
 
 %dir %{_appdir}/extras
-%{_appdir}/extras/class.html2text.inc
+%{_appdir}/extras/class.html2text.php
 %{_appdir}/extras/htmlfilter.php
 %{_appdir}/extras/ntlm_sasl_client.php
 
