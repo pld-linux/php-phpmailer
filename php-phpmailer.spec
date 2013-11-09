@@ -75,16 +75,15 @@ for a in $(find -name '*.php' -o -name '*.inc'); do
 	php -n -l $a
 done
 
-phpdoc --title 'PHPMailer version %{version}' --target phpdoc --defaultpackagename PHPMailer -f 'class.*.php'
-# nuke smarty cache
-rm -rf phpdoc/????????????????????????????????
-rm -rf phpdoc/*/????????????????????????????????
+rm -rf phpdoc
+phpdoc --title 'PHPMailer version %{version}' --target phpdoc --defaultpackagename PHPMailer \
+	--directory . --ignore test/,examples/,extras/,test_script/,language/,phpdoc/ --sourcecode
 
 # copy images, phpdoc is likely buggy not doing itself
 sdir=%{php_pear_dir}/data/PhpDocumentor/phpDocumentor/Converters/HTML/frames/templates/earthli/templates/media/images
 install -d phpdoc/media/images
-cp -a $sdir/Constant.png phpdoc/media/images
-cp -a $sdir/Variable.png phpdoc/media/images
+cp -p $sdir/Constant.png phpdoc/media/images
+cp -p $sdir/Variable.png phpdoc/media/images
 
 %install
 rm -rf $RPM_BUILD_ROOT
