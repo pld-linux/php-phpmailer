@@ -5,7 +5,7 @@ Summary:	Full featured email transfer class for PHP
 Summary(pl.UTF-8):	W pełni funkcjonalna klasa PHP do przesyłania e-maili
 Name:		php-%{pkgname}
 Version:	5.2.7
-Release:	2
+Release:	3
 License:	LGPL v2.1
 Group:		Development/Languages/PHP
 Source0:	https://github.com/PHPMailer/PHPMailer/archive/v%{version}/%{pkgname}-%{version}.tar.gz
@@ -87,9 +87,12 @@ cp -p $sdir/Variable.png phpdoc/media/images
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT%{_appdir}/language
+install -d $RPM_BUILD_ROOT{%{php_data_dir},%{_appdir}/language}
 
-cp -p class.phpmailer.php $RPM_BUILD_ROOT%{php_data_dir}
+ln -s %{_appdir}/class.phpmailer.php $RPM_BUILD_ROOT%{php_data_dir}
+ln -s %{_appdir}/PHPMailerAutoload.php $RPM_BUILD_ROOT%{php_data_dir}
+
+cp -p class.phpmailer.php $RPM_BUILD_ROOT%{_appdir}
 # plugins: for smtp and pop before smtp auth
 cp -p class.{smtp,pop3}.php  $RPM_BUILD_ROOT%{_appdir}
 # language: translations of error messages
@@ -112,9 +115,12 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(644,root,root,755)
 %doc README.md changelog.md docs/*
+# public interfaces
 %{php_data_dir}/class.phpmailer.php
+%{php_data_dir}/PHPMailerAutoload.php
 
 %dir %{_appdir}
+%{_appdir}/class.phpmailer.php
 %{_appdir}/class.pop3.php
 %{_appdir}/class.smtp.php
 %dir %{_appdir}/language
