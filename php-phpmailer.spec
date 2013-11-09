@@ -4,12 +4,12 @@
 Summary:	Full featured email transfer class for PHP
 Summary(pl.UTF-8):	W pełni funkcjonalna klasa PHP do przesyłania e-maili
 Name:		php-%{pkgname}
-Version:	5.2.6
+Version:	5.2.7
 Release:	1
 License:	LGPL v2.1
 Group:		Development/Languages/PHP
-Source0:	https://github.com/PHPMailer/PHPMailer/archive/v%{version}.tar.gz
-# Source0-md5:	24b6658b50d2a363a81d927bcbffafd2
+Source0:	https://github.com/PHPMailer/PHPMailer/archive/v%{version}/%{pkgname}-%{version}.tar.gz
+# Source0-md5:	b07621694679cd625af3f53771502677
 Patch0:		paths.patch
 URL:		https://github.com/PHPMailer/PHPMailer
 BuildRequires:	php-pear-PhpDocumentor
@@ -119,6 +119,7 @@ rm -rf $RPM_BUILD_ROOT
 %lang(eo) %{_appdir}/language/phpmailer.lang-eo.php
 %lang(es) %{_appdir}/language/phpmailer.lang-es.php
 %lang(et) %{_appdir}/language/phpmailer.lang-et.php
+%lang(fa) %{_appdir}/language/phpmailer.lang-fa.php
 %lang(fi) %{_appdir}/language/phpmailer.lang-fi.php
 %lang(fo) %{_appdir}/language/phpmailer.lang-fo.php
 %lang(fr) %{_appdir}/language/phpmailer.lang-fr.php
@@ -126,6 +127,7 @@ rm -rf $RPM_BUILD_ROOT
 %lang(hu) %{_appdir}/language/phpmailer.lang-hu.php
 %lang(it) %{_appdir}/language/phpmailer.lang-it.php
 %lang(ja) %{_appdir}/language/phpmailer.lang-ja.php
+%lang(lt) %{_appdir}/language/phpmailer.lang-lt.php
 %lang(nb) %{_appdir}/language/phpmailer.lang-no.php
 %lang(nl) %{_appdir}/language/phpmailer.lang-nl.php
 %lang(pl) %{_appdir}/language/phpmailer.lang-pl.php
@@ -135,10 +137,12 @@ rm -rf $RPM_BUILD_ROOT
 %lang(sk) %{_appdir}/language/phpmailer.lang-sk.php
 %lang(sv) %{_appdir}/language/phpmailer.lang-se.php
 %lang(tr) %{_appdir}/language/phpmailer.lang-tr.php
+%lang(uk) %{_appdir}/language/phpmailer.lang-uk.php
 %lang(zh) %{_appdir}/language/phpmailer.lang-zh.php
 %lang(zh_CN) %{_appdir}/language/phpmailer.lang-zh_cn.php
 
 %dir %{_appdir}/extras
+%{_appdir}/extras/EasyPeasyICS.php
 %{_appdir}/extras/class.html2text.php
 %{_appdir}/extras/htmlfilter.php
 %{_appdir}/extras/ntlm_sasl_client.php
