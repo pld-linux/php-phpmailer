@@ -11,7 +11,10 @@ Group:		Development/Languages/PHP
 Source0:	https://github.com/PHPMailer/PHPMailer/archive/v%{version}/%{pkgname}-%{version}.tar.gz
 # Source0-md5:	b07621694679cd625af3f53771502677
 Patch0:		paths.patch
+Patch1:		https://github.com/glensc/PHPMailer/commit/f302f1d497469d81b13797b6f2fb986b729928f3.patch
+# Patch1-md5:	cfe92497baf90bcceb1ecc84c71b1f36
 URL:		https://github.com/PHPMailer/PHPMailer
+%{?with_tests:BuildRequires:    %{php_name}-cli}
 BuildRequires:	php-pear-PhpDocumentor
 BuildRequires:	rpm-php-pearprov >= 4.4.2-11
 BuildRequires:	rpmbuild(macros) >= 1.663
@@ -64,8 +67,14 @@ Dokumentacja do %{name}.
 %prep
 %setup -q -n PHPMailer-%{version}%{?subver:-%{subver}}
 %patch0 -p1
+%patch1 -p1
 
 %build
+# syntax lint
+for a in $(find -name '*.php' -o -name '*.inc'); do
+	php -n -l $a
+done
+
 phpdoc --title 'PHPMailer version %{version}' --target phpdoc --defaultpackagename PHPMailer -f 'class.*.php'
 # nuke smarty cache
 rm -rf phpdoc/????????????????????????????????

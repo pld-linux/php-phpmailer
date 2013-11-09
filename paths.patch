@@ -14,7 +14,7 @@
       * @access public
       */
 -    public function setLanguage($langcode = 'en', $lang_path = 'language/')
-+    public function setLanguage($langcode = 'en', $lang_path = '/usr/share/php/phpmailer/language/') {
++    public function setLanguage($langcode = 'en', $lang_path = '/usr/share/php/phpmailer/language/')
      {
          //Define full set of translatable strings
          $PHPMAILER_LANG = array(
