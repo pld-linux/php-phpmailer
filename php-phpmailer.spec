@@ -35,7 +35,7 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 %define		_noautophp	php-openssl php-mbstring php-filter php-hash
 
 # bad depsolver
-%define		_noautoreq_pear extras/ntlm_sasl_client.php extras/class.html2text.php
+%define		_noautoreq_pear extras/ntlm_sasl_client.php extras/class.html2text.php PHPMailerAutoload.php
 
 # put it together for rpmbuild
 %define		_noautoreq	%{?_noautophp}
