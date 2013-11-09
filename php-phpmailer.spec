@@ -92,7 +92,7 @@ install -d $RPM_BUILD_ROOT{%{php_data_dir},%{_appdir}/language}
 ln -s %{_appdir}/class.phpmailer.php $RPM_BUILD_ROOT%{php_data_dir}
 ln -s %{_appdir}/PHPMailerAutoload.php $RPM_BUILD_ROOT%{php_data_dir}
 
-cp -p class.phpmailer.php $RPM_BUILD_ROOT%{_appdir}
+cp -p class.phpmailer.php PHPMailerAutoload.php $RPM_BUILD_ROOT%{_appdir}
 # plugins: for smtp and pop before smtp auth
 cp -p class.{smtp,pop3}.php  $RPM_BUILD_ROOT%{_appdir}
 # language: translations of error messages
@@ -116,10 +116,11 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc README.md changelog.md docs/*
 # public interfaces
-%{php_data_dir}/class.phpmailer.php
 %{php_data_dir}/PHPMailerAutoload.php
+%{php_data_dir}/class.phpmailer.php
 
 %dir %{_appdir}
+%{_appdir}/PHPMailerAutoload.php
 %{_appdir}/class.phpmailer.php
 %{_appdir}/class.pop3.php
 %{_appdir}/class.smtp.php
