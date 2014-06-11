@@ -121,11 +121,13 @@ rm -rf $RPM_BUILD_ROOT
 %{_appdir}/class.smtp.php
 %dir %{_appdir}/language
 %lang(ar) %{_appdir}/language/phpmailer.lang-ar.php
+%lang(be) %{_appdir}/language/phpmailer.lang-be.php
 %lang(ca) %{_appdir}/language/phpmailer.lang-ca.php
 %lang(ch) %{_appdir}/language/phpmailer.lang-ch.php
 %lang(cs) %{_appdir}/language/phpmailer.lang-cz.php
 %lang(da) %{_appdir}/language/phpmailer.lang-dk.php
 %lang(de) %{_appdir}/language/phpmailer.lang-de.php
+%lang(el) %{_appdir}/language/phpmailer.lang-el.php
 %lang(eo) %{_appdir}/language/phpmailer.lang-eo.php
 %lang(es) %{_appdir}/language/phpmailer.lang-es.php
 %lang(et) %{_appdir}/language/phpmailer.lang-et.php
@@ -133,21 +135,28 @@ rm -rf $RPM_BUILD_ROOT
 %lang(fi) %{_appdir}/language/phpmailer.lang-fi.php
 %lang(fo) %{_appdir}/language/phpmailer.lang-fo.php
 %lang(fr) %{_appdir}/language/phpmailer.lang-fr.php
+%lang(gl) %{_appdir}/language/phpmailer.lang-gl.php
 %lang(he) %{_appdir}/language/phpmailer.lang-he.php
+%lang(hr) %{_appdir}/language/phpmailer.lang-hr.php
 %lang(hu) %{_appdir}/language/phpmailer.lang-hu.php
 %lang(it) %{_appdir}/language/phpmailer.lang-it.php
 %lang(ja) %{_appdir}/language/phpmailer.lang-ja.php
+%lang(ka) %{_appdir}/language/phpmailer.lang-ka.php
 %lang(lt) %{_appdir}/language/phpmailer.lang-lt.php
+%lang(lv) %{_appdir}/language/phpmailer.lang-lv.php
 %lang(nb) %{_appdir}/language/phpmailer.lang-no.php
 %lang(nl) %{_appdir}/language/phpmailer.lang-nl.php
 %lang(pl) %{_appdir}/language/phpmailer.lang-pl.php
+%lang(pt) %{_appdir}/language/phpmailer.lang-pt.php
 %lang(pt_BR) %{_appdir}/language/phpmailer.lang-br.php
 %lang(ro) %{_appdir}/language/phpmailer.lang-ro.php
 %lang(ru) %{_appdir}/language/phpmailer.lang-ru.php
 %lang(sk) %{_appdir}/language/phpmailer.lang-sk.php
+%lang(sr) %{_appdir}/language/phpmailer.lang-sr.php
 %lang(sv) %{_appdir}/language/phpmailer.lang-se.php
 %lang(tr) %{_appdir}/language/phpmailer.lang-tr.php
 %lang(uk) %{_appdir}/language/phpmailer.lang-uk.php
+%lang(vi) %{_appdir}/language/phpmailer.lang-vi.php
 %lang(zh) %{_appdir}/language/phpmailer.lang-zh.php
 %lang(zh_CN) %{_appdir}/language/phpmailer.lang-zh_cn.php
 
