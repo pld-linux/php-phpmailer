@@ -64,6 +64,11 @@ Dokumentacja do %{name}.
 %prep
 %setup -q -n PHPMailer-%{version}%{?subver:-%{subver}}
 
+%if "%{pld_release}" == "ac"
+# requires php5.3
+rm test/bootstrap.php
+%endif
+
 %build
 # syntax lint
 for a in $(find -name '*.php' -o -name '*.inc'); do
