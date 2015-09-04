@@ -1,3 +1,7 @@
+#
+# Conditional build:
+%bcond_with	tests		# build without tests
+
 %define		pkgname	phpmailer
 %define		php_min_version 5.2.4
 %include	/usr/lib/rpm/macros.php
@@ -11,10 +15,15 @@ Group:		Development/Languages/PHP
 Source0:	https://github.com/PHPMailer/PHPMailer/archive/v%{version}/%{pkgname}-%{version}.tar.gz
 # Source0-md5:	5c2d02e6fc4a61c9ba8b20810b564b1c
 URL:		https://github.com/PHPMailer/PHPMailer
-%{?with_tests:BuildRequires:    %{php_name}-cli}
 BuildRequires:	php-pear-PhpDocumentor
 BuildRequires:	rpm-php-pearprov >= 4.4.2-11
 BuildRequires:	rpmbuild(macros) >= 1.663
+%if %{with tests}
+BuildRequires:	%{php_name}-cli
+BuildRequires:	%{php_name}-mbstring
+BuildRequires:	phpunit
+BuildRequires:	which
+%endif
 Requires:	php(core) >= %{php_min_version}
 Requires:	php(date)
 Requires:	php(pcre)
@@ -76,6 +85,12 @@ rm test/bootstrap.php
 for a in $(find -name '*.php' -o -name '*.inc'); do
 	php -n -l $a
 done
+
+%if %{with tests}
+cd test
+%{__php} $(which phpunit) .
+cd -
+%endif
 
 rm -rf phpdoc
 phpdoc --title 'PHPMailer version %{version}' --target phpdoc --defaultpackagename PHPMailer \
