@@ -15,6 +15,7 @@ Group:		Development/Languages/PHP
 Source0:	https://github.com/PHPMailer/PHPMailer/archive/v%{version}/%{pkgname}-%{version}.tar.gz
 # Source0-md5:	5c2d02e6fc4a61c9ba8b20810b564b1c
 URL:		https://github.com/PHPMailer/PHPMailer
+BuildRequires:	php-devel
 BuildRequires:	php-pear-PhpDocumentor
 BuildRequires:	rpm-php-pearprov >= 4.4.2-11
 BuildRequires:	rpmbuild(macros) >= 1.663
