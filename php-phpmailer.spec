@@ -4,12 +4,12 @@
 Summary:	Full featured email transfer class for PHP
 Summary(pl.UTF-8):	W pełni funkcjonalna klasa PHP do przesyłania e-maili
 Name:		php-%{pkgname}
-Version:	5.2.9
+Version:	5.2.12
 Release:	1
 License:	LGPL v2.1
 Group:		Development/Languages/PHP
 Source0:	https://github.com/PHPMailer/PHPMailer/archive/v%{version}/%{pkgname}-%{version}.tar.gz
-# Source0-md5:	930220b4a2f2a8a33ff10c6d4ad4d31e
+# Source0-md5:	5c2d02e6fc4a61c9ba8b20810b564b1c
 URL:		https://github.com/PHPMailer/PHPMailer
 %{?with_tests:BuildRequires:    %{php_name}-cli}
 BuildRequires:	php-pear-PhpDocumentor
@@ -22,6 +22,8 @@ Suggests:	php(hash)
 Suggests:	php(mbstring)
 Suggests:	php(openssl)
 Obsoletes:	phpmailer
+# Gmail XOAUTH2 authentication
+#Suggests:	php-league-oauth2-client
 BuildArch:	noarch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -32,7 +34,7 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 %define		_noautophp	php-openssl php-mbstring php-filter php-hash
 
 # bad depsolver
-%define		_noautoreq_pear extras/ntlm_sasl_client.php extras/class.html2text.php PHPMailerAutoload.php
+%define		_noautoreq_pear extras/ntlm_sasl_client.php PHPMailerAutoload.php
 
 # put it together for rpmbuild
 %define		_noautoreq	%{?_noautophp}
@@ -92,13 +94,11 @@ install -d $RPM_BUILD_ROOT{%{php_data_dir},%{_appdir}/language}
 ln -s %{_appdir}/class.phpmailer.php $RPM_BUILD_ROOT%{php_data_dir}
 ln -s %{_appdir}/PHPMailerAutoload.php $RPM_BUILD_ROOT%{php_data_dir}
 
-cp -p class.phpmailer.php PHPMailerAutoload.php $RPM_BUILD_ROOT%{_appdir}
-# plugins: for smtp and pop before smtp auth
-cp -p class.{smtp,pop3}.php  $RPM_BUILD_ROOT%{_appdir}
+cp -p class.*.php PHPMailerAutoload.php $RPM_BUILD_ROOT%{_appdir}
 # language: translations of error messages
 cp -p language/*.php $RPM_BUILD_ROOT%{_appdir}/language
 
-# extras: htmlfilter.php, ntlm_sasl_client.php
+# extras: htmlfilter.php, ntlm_sasl_client.php, EasyPeasyICS.php
 cp -a extras $RPM_BUILD_ROOT%{_appdir}
 
 # examples
@@ -121,12 +121,17 @@ rm -rf $RPM_BUILD_ROOT
 
 %dir %{_appdir}
 %{_appdir}/PHPMailerAutoload.php
+%{_appdir}/class.oauth.php
 %{_appdir}/class.phpmailer.php
+%{_appdir}/class.phpmaileroauth.php
 %{_appdir}/class.pop3.php
 %{_appdir}/class.smtp.php
 %dir %{_appdir}/language
+%lang(am) %{_appdir}/language/phpmailer.lang-am.php
 %lang(ar) %{_appdir}/language/phpmailer.lang-ar.php
+%lang(az) %{_appdir}/language/phpmailer.lang-az.php
 %lang(be) %{_appdir}/language/phpmailer.lang-be.php
+%lang(bg) %{_appdir}/language/phpmailer.lang-bg.php
 %lang(ca) %{_appdir}/language/phpmailer.lang-ca.php
 %lang(ch) %{_appdir}/language/phpmailer.lang-ch.php
 %lang(cs) %{_appdir}/language/phpmailer.lang-cz.php
@@ -144,11 +149,14 @@ rm -rf $RPM_BUILD_ROOT
 %lang(he) %{_appdir}/language/phpmailer.lang-he.php
 %lang(hr) %{_appdir}/language/phpmailer.lang-hr.php
 %lang(hu) %{_appdir}/language/phpmailer.lang-hu.php
+%lang(id) %{_appdir}/language/phpmailer.lang-id.php
 %lang(it) %{_appdir}/language/phpmailer.lang-it.php
 %lang(ja) %{_appdir}/language/phpmailer.lang-ja.php
 %lang(ka) %{_appdir}/language/phpmailer.lang-ka.php
+%lang(ko) %{_appdir}/language/phpmailer.lang-ko.php
 %lang(lt) %{_appdir}/language/phpmailer.lang-lt.php
 %lang(lv) %{_appdir}/language/phpmailer.lang-lv.php
+%lang(ms) %{_appdir}/language/phpmailer.lang-ms.php
 %lang(nb) %{_appdir}/language/phpmailer.lang-no.php
 %lang(nl) %{_appdir}/language/phpmailer.lang-nl.php
 %lang(pl) %{_appdir}/language/phpmailer.lang-pl.php
@@ -157,6 +165,7 @@ rm -rf $RPM_BUILD_ROOT
 %lang(ro) %{_appdir}/language/phpmailer.lang-ro.php
 %lang(ru) %{_appdir}/language/phpmailer.lang-ru.php
 %lang(sk) %{_appdir}/language/phpmailer.lang-sk.php
+%lang(sl) %{_appdir}/language/phpmailer.lang-sl.php
 %lang(sr) %{_appdir}/language/phpmailer.lang-sr.php
 %lang(sv) %{_appdir}/language/phpmailer.lang-se.php
 %lang(tr) %{_appdir}/language/phpmailer.lang-tr.php
@@ -168,7 +177,6 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{_appdir}/extras
 %{_appdir}/extras/README.md
 %{_appdir}/extras/EasyPeasyICS.php
-%{_appdir}/extras/class.html2text.php
 %{_appdir}/extras/htmlfilter.php
 %{_appdir}/extras/ntlm_sasl_client.php
 
