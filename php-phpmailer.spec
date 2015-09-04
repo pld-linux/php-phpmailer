@@ -75,15 +75,29 @@ Dokumentacja do %{name}.
 %prep
 %setup -q -n PHPMailer-%{version}%{?subver:-%{subver}}
 
-%if "%{pld_release}" == "ac"
-# requires php5.3
-rm test/bootstrap.php
-%endif
-
 %build
 # syntax lint
-for a in $(find -name '*.php' -o -name '*.inc'); do
-	php -n -l $a
+for f in $(find -name '*.php' -o -name '*.inc'); do
+
+%if "%{php_major_version}.%{php_minor_version}" < "5.4"
+	case $(basename $f) in
+	class.oauth.php|get_oauth_token.php)
+		# needs php 5.4
+		continue
+	;;
+	esac
+%endif
+
+%if "%{php_major_version}.%{php_minor_version}" < "5.3"
+	case $(basename $f) in
+	bootstrap.php|phpmailerTest.php)
+		# needs php 5.3
+		continue
+	;;
+	esac
+%endif
+
+	%{__php} -n -l $f
 done
 
 %if %{with tests}
