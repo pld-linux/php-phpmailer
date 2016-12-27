@@ -144,7 +144,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc README.md changelog.md docs/*
+#%doc README.md changelog.md docs/*
 # public interfaces
 %{php_data_dir}/PHPMailerAutoload.php
 %{php_data_dir}/class.phpmailer.php
