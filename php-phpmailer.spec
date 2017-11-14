@@ -8,12 +8,12 @@
 Summary:	Full featured email transfer class for PHP
 Summary(pl.UTF-8):	W pełni funkcjonalna klasa PHP do przesyłania e-maili
 Name:		php-%{pkgname}
-Version:	5.2.23
+Version:	5.2.24
 Release:	1
 License:	LGPL v2.1
 Group:		Development/Languages/PHP
 Source0:	https://github.com/PHPMailer/PHPMailer/archive/v%{version}/%{pkgname}-%{version}.tar.gz
-# Source0-md5:	f3c3c888820b40687083def0ad48512d
+# Source0-md5:	9640b3de850dafe5741d89cc29cde84e
 URL:		https://github.com/PHPMailer/PHPMailer
 BuildRequires:	php-devel
 BuildRequires:	php-pear-PhpDocumentor
@@ -194,10 +194,10 @@ rm -rf $RPM_BUILD_ROOT
 %lang(pt) %{_appdir}/language/phpmailer.lang-pt.php
 %lang(pt_BR) %{_appdir}/language/phpmailer.lang-pt_br.php
 %lang(ro) %{_appdir}/language/phpmailer.lang-ro.php
+%lang(rs) %{_appdir}/language/phpmailer.lang-rs.php
 %lang(ru) %{_appdir}/language/phpmailer.lang-ru.php
 %lang(sk) %{_appdir}/language/phpmailer.lang-sk.php
 %lang(sl) %{_appdir}/language/phpmailer.lang-sl.php
-%lang(sr) %{_appdir}/language/phpmailer.lang-sr.php
 %lang(sv) %{_appdir}/language/phpmailer.lang-sv.php
 %lang(tr) %{_appdir}/language/phpmailer.lang-tr.php
 %lang(uk) %{_appdir}/language/phpmailer.lang-uk.php
